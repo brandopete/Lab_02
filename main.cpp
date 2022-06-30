@@ -21,6 +21,8 @@ int main(int argc, char *argv[]) {
         return 0;
     }
 
+    cout << "hello world!0" << endl;
+
     string mapName = argv[1];
     int startInd = stoi(argv[2]);
     int endInd = stoi(argv[3]);
