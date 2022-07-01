@@ -38,9 +38,9 @@ using namespace std;
             curr = myPriorityQueue.top();
             myPriorityQueue.pop();
             last = n;
-            for(int j = 0; Cost(last,j) > 0){
+            for(int j = 0; theCosts(last,j) > 0; ++j){
                 Node nn;
-                nn.cost = curr.cost + (Cost(last,j) > 0);
+                nn.cost = curr.cost + (theCosts(last,j) > 0);
                 myPriorityQueue.push(nn);
 
             }
