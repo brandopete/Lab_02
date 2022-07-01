@@ -6,11 +6,24 @@
 #define LAB_02_NAVIGATION_H
 
 #include <iostream>
+#include <vector>
 #include "NavigationInterface.h"
 
 using namespace std;
 
+struct Node {
+    int cost;
+    queue<int> path;
+
+    bool operator() (Node const& n1, Node const& n2) {
+        return n1.cost > n2.cost;
+    }
+};
+
 class Navigation : public NavigationInterface {
+private:
+    int numNodes;
+    vector< vector<int> > theCosts;
 public:
     Navigation();
     ~Navigation();
