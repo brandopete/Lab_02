@@ -1,5 +1,5 @@
 #include <string>
-#include <queue>
+#include <sstream>
 #include "Navigation.h"
 
 using namespace std;
@@ -12,10 +12,28 @@ using namespace std;
         cout << "In destructor" << endl;
     }
 
+
+
     bool Navigation::readNetwork(string _mapName){
         cout << "reading the road network" << endl;
+        istringstream ifs;
+        theCosts.empty();
+        int num;
+        ifs >> _mapName;
+        num = stoi(ifs.str());
+        for(int i = 0; i < num; ++i){
+            for(int j = 0; j < num; ++j){
+                ifs >> _mapName;
+                theCosts[i][stoi(ifs.str())];
+            }
+        }
+        if(!theCosts.empty()){
+            return true;
+        }
+        else{
+            return false;
+        }
 
-        return false;
     }
 
 
@@ -32,27 +50,31 @@ using namespace std;
         myPriorityQueue.push(n);
 
         //(4) Loop through the path
-        Node last;
+        int last;
         Node curr;
-        while(n.path.front() != _endInd){
+        while(myPriorityQueue.top().path.back() != _endInd){
             curr = myPriorityQueue.top();
             myPriorityQueue.pop();
-            last = n;
-            for(int j = 0; theCosts(last,j) > 0; ++j){
-                Node nn;
-                nn.cost = curr.cost + (theCosts(last,j) > 0);
-                myPriorityQueue.push(nn);
-
+            last = curr.path.back();
+            for(int j = 0; j < myPriorityQueue.size(); ++j){
+                if(theCosts[last][j] > 0) {
+                    Node nn;
+                    nn.cost = curr.cost + (theCosts[last][j]);
+                    curr.path.push(j);
+                    nn.path = curr.path;
+                    myPriorityQueue.push(nn);
+                }
             }
-            n.path.back();
-
         }
-
-
-        cout << "Not computing shortest path" << endl;
+        thePath = myPriorityQueue.top().path;
+        //cout << "Not computing shortest path" << endl;
         return thePath;
     }
 
     void Navigation::printPath(queue<int> _path){
-        cout << "I'm not printing stuff yet" << endl;
+        //cout << "I'm not printing stuff yet" << endl;
+        for(int i = 0; i < _path.size(); ++i){
+            cout << _path.front();
+            _path.pop();
+        }
     }
