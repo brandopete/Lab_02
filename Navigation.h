@@ -6,15 +6,14 @@
 #define LAB_02_NAVIGATION_H
 
 #include <iostream>
-#include <string>
-#include <queue>
+#include "NavigationInterface.h"
 
 using namespace std;
 
 class Navigation : public NavigationInterface {
 public:
-    Navigation() {}
-    ~Navigation() {}
+    Navigation();
+    ~Navigation();
 
     // This function reads in the contents of the file _mapName.
     // The function can assume that the contents of the specified conform with the specs given in the README.txt file
